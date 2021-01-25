@@ -12,7 +12,8 @@ class Chip extends React.Component<Props, never> {
         key={this.props.label}
         variant='outlined'
         label={this.props.label}
-        icon={<i className="fas fa-film" />}
+        icon={<i className="fas fa-film fa-lg" />}
+        color='default'
       />
     )
   }

@@ -20,10 +20,14 @@ class View extends React.Component<{}, never> {
     ], 
   }
   return (
-    <>
-      <AllPersonsView />
-      <PersonDetailsView person={person} />
-    </>
+    <div className='columns is-centered'>
+      <div className='column is-10'>
+        <div className='columns is-multiline is-variable is-2 '>
+          <AllPersonsView />
+          <PersonDetailsView person={person} />
+        </div>
+      </div>
+    </div>
   );
 }
 }
