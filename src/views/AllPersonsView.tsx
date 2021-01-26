@@ -19,6 +19,12 @@ const AllPersonsView = (props: Props) => {
 
     console.log('newArr === ', newArr)
 
+    const toDisplayPersons = newArr.map((_p: any) => ({
+      name: _p.name,
+      height: _p.height,
+      mass: _p.mass,
+    }))
+
     return (
       <div className='column is-full'>
         <div className='columns is-multiline'>
@@ -26,7 +32,7 @@ const AllPersonsView = (props: Props) => {
             <h2>Star Wars people </h2>
           </div>
           <div className='column is-full'>
-            <Table /* data={newArr} */  />
+            <Table rows={toDisplayPersons}  />
           </div>
         </div>
       
