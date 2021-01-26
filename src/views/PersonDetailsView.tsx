@@ -3,33 +3,34 @@ import { Tooltip, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
+import { IGender } from '../stores/person';
 
-type IPerson = {
+type IDetailedPerson =  {
   name: string
-  birthYear: string
-  gender: string
+  birthYear: number
+  gender: IGender
   films: string[]
 }
 
 interface Props {
-  person: IPerson
+  person: IDetailedPerson
 }
 
 class PersonDetailsView extends React.Component<Props, never> {
   render() {
     const { person } = this.props
-    const personGender = ():string => {
+    const genderIcon = ():string => {
       switch(person.gender) {
-        case 'male':
+        case 'MALE':
           return 'mars'
-        case 'female':
+        case 'FEMALE':
           return 'venus'
-        case 'n/a':
+        case 'UNDEFINED':
         default:
           return 'genderless'
       }
     }
-    const rowWrapper = (key: string, value: string | JSX.Element) => {
+    const rowWrapper = (key: string, value: string | number | JSX.Element) => {
       return (
         <div className='column is-full'> 
           <p><b>{key}: </b><span>{value}</span></p>
@@ -54,8 +55,8 @@ class PersonDetailsView extends React.Component<Props, never> {
           </div>
           {rowWrapper('Name', person.name)}
           {rowWrapper('Birth year', person.birthYear)}
-          {rowWrapper('Gender', <i className={`fas fa-${personGender()} fa-lg`}></i>)}
-           {person.films.length > 0 && person.films.map((_film, index) => (
+          {rowWrapper('Gender', <i className={`fas fa-${genderIcon()} fa-lg`}></i>)}
+           {person.films.length > 0 && person.films.map((_film: string, index: number) => (
              <div className='column is-narrow' key={index}>
               <Chip label={_film}/>
             </div>

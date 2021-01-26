@@ -3,6 +3,7 @@ import Table from '../components/Table'
 
 interface Props {
   getPersons: () => any
+  getSelectedPerson: (name: string | undefined) => void
 }
 
 const AllPersonsView = (props: Props) => {
@@ -32,7 +33,10 @@ const AllPersonsView = (props: Props) => {
             <h2>Star Wars people </h2>
           </div>
           <div className='column is-full'>
-            <Table rows={toDisplayPersons}  />
+            <Table 
+              rows={toDisplayPersons}  
+              getSelectedPerson={props.getSelectedPerson}
+            />
           </div>
         </div>
       

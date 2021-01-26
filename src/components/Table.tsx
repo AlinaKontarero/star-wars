@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 
-type Data =  {
+export type Data =  {
   name: string;
   height: string;
   mass: string;
@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function EnhancedTable(props: { rows: Data []}) {
+export default function EnhancedTable(props: { rows: Data [], getSelectedPerson: (name: string | undefined) => void}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
@@ -145,8 +145,10 @@ export default function EnhancedTable(props: { rows: Data []}) {
     setOrderBy(property);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    setSelected(name);
+  const handleClick = async (event: React.MouseEvent<unknown>, name: string) => {
+    event.preventDefault();
+    await setSelected(name);
+    props.getSelectedPerson(selected)
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
