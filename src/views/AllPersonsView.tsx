@@ -1,46 +1,39 @@
 import * as React from 'react'
+import Loading from '../components/Loading'
 import Table from '../components/Table'
+import { IPerson } from '../stores/person'
 
 interface Props {
-  getPersons: () => any
+  allPersons: IPerson[]
   getSelectedPerson: (name: string | undefined) => void
 }
 
 const AllPersonsView = (props: Props) => {
-    const persons = props.getPersons().persons
+  const toDisplayPersons = props.allPersons.map((_p: any) => ({
+    name: _p.name,
+    height: _p.height,
+    mass: _p.mass,
+  }))
 
-    const newArr = persons.map((_hero: any) => ({
-      name: _hero.name,
-      height: _hero.height,
-      mass: _hero.mass,
-      birthYear: _hero.birth_year,
-      gender: _hero.gender,
-      films: _hero.films
-    }))
-
-    console.log('newArr === ', newArr)
-
-    const toDisplayPersons = newArr.map((_p: any) => ({
-      name: _p.name,
-      height: _p.height,
-      mass: _p.mass,
-    }))
-
-    return (
-      <div className='column is-full'>
-        <div className='columns is-multiline'>
-          <div className='column is-full'>
-            <h2>Star Wars people </h2>
-          </div>
-          <div className='column is-full'>
-            <Table 
-              rows={toDisplayPersons}  
-              getSelectedPerson={props.getSelectedPerson}
-            />
-          </div>
+  return (
+    <div className='column is-full'>
+      <div className='columns is-multiline'>
+        <div className='column is-full'>
+          <h2>Star Wars people </h2>
         </div>
-      
+          {props.allPersons.length > 0 
+          ? 
+            <div className='column is-full'>
+              <Table 
+                rows={toDisplayPersons}  
+                getSelectedPerson={props.getSelectedPerson}
+              />
+            </div>
+          : <Loading />
+        }
       </div>
+    
+    </div>
     )
   }
 
