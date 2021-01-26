@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Footer from '../components/Footer';
+import usePersons from '../utils/persons';
 import AllPersonsView from './AllPersonsView';
 import PersonDetailsView from './PersonDetailsView';
 
@@ -24,7 +25,9 @@ class View extends React.Component<{}, never> {
     <div className='columns is-centered'>
       <div className='column is-10'>
         <div className='columns is-multiline is-variable is-2 '>
-          <AllPersonsView />
+          <AllPersonsView 
+            getPersons={usePersons}
+          />
           <PersonDetailsView person={person} />
           <Footer />
         </div>

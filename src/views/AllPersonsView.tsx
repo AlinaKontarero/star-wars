@@ -2,43 +2,23 @@ import * as React from 'react'
 import Table from '../components/Table'
 
 interface Props {
-
+  getPersons: () => any
 }
 
-class AllPersonsView extends React.Component<Props, never> {
-  public async componentDidMount() {
-    this.getPersons()
-  }
+const AllPersonsView = (props: Props) => {
+    const persons = props.getPersons().persons
 
-  private getPersons = () => {
-    const persons = fetch(`https://swapi.dev/api/people/`, {
-      method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // body: JSON.stringify(
-        //   {
-        //     flowCriteria: this.props.flowCriteria,
-        //     relatedObject: this.props.relatedObject
-        //   }
-        // )
-    }
-  
-    )
-      .then( x => x.json)
-      .catch(e => {
-        // eslint-disable-next-line no-console
-        console.error(e)
-        return {}
-      })
-      if(persons) {
-        const results = JSON.stringify(persons)
-        console.log('results::: ', results)
-        return persons
-      }
-    }
+    const newArr = persons.map((_hero: any) => ({
+      name: _hero.name,
+      height: _hero.height,
+      mass: _hero.mass,
+      birthYear: _hero.birth_year,
+      gender: _hero.gender,
+      films: _hero.films
+    }))
 
-  render() {
+    console.log('newArr === ', newArr)
+
     return (
       <div className='column is-full'>
         <div className='columns is-multiline'>
@@ -46,13 +26,13 @@ class AllPersonsView extends React.Component<Props, never> {
             <h2>Star Wars people </h2>
           </div>
           <div className='column is-full'>
-            <Table />
+            <Table /* data={newArr} */  />
           </div>
         </div>
       
       </div>
     )
   }
-}
+
 
 export default AllPersonsView
