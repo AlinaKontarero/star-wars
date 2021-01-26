@@ -1,22 +1,35 @@
 import * as React from 'react'
-import { Chip as MuiChip, ChipProps } from '@material-ui/core'
+import { Chip as MuiChip, ChipProps, createStyles, makeStyles, Theme } from '@material-ui/core'
 
 interface Props extends ChipProps {
   label: string
 }
 
-class Chip extends React.Component<Props, never> {
-  render() {
+const  Chip = (props: Props) =>  {
+    const classes = useStyles();
     return (
       <MuiChip 
-        key={this.props.label}
+        classes={{
+          root: classes.root, 
+          icon: classes.icon
+        }}
         variant='outlined'
-        label={this.props.label}
+        label={props.label}
         icon={<i className="fas fa-film fa-lg" />}
-        color='default'
       />
     )
   }
-}
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      color: 'white',
+      borderColor: 'white',
+    },
+    icon: {
+      color: 'white'
+    }
+  }),
+);
 
 export default Chip
