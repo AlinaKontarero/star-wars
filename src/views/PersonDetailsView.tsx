@@ -8,6 +8,7 @@ import { ICharacter } from '../reducers/personReducer';
 
 interface Props {
   person: ICharacter
+  onClose: () => void 
 }
 
 class PersonDetailsView extends React.Component<Props, never> {
@@ -35,12 +36,6 @@ class PersonDetailsView extends React.Component<Props, never> {
         </div>
       )
     }
-    const onClose = () => {
-      // console.log('close::: ', this.props.person)
-      // this.props.person.deselect()
-      // console.log('after::: ', this.props.person)
-    }
-
 
     return (
       <div className='column is-full'>
@@ -51,7 +46,7 @@ class PersonDetailsView extends React.Component<Props, never> {
           <div className='column is-narrow'>
           <Tooltip title='Close' TransitionComponent={Zoom} arrow={true} placement={'top'}>
             <IconButton 
-              onChange={onClose} 
+              onClick={this.props.onClose} 
               color='inherit'
               >
               <CloseIcon />
