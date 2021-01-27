@@ -1,10 +1,12 @@
 import * as React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Tooltip, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
 import Loading from '../components/Loading';
 import { ICharacter } from '../reducers/personReducer';
+import { IconName } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   person: ICharacter
@@ -18,7 +20,7 @@ class PersonDetailsView extends React.Component<Props, never> {
     // const films = this.namedFilms()
 
     const { person } = this.props
-    const genderIcon = ():string => {
+    const genderIcon = (): IconName => {
       switch(person.gender) {
         case 'male':
           return 'mars'
@@ -29,6 +31,7 @@ class PersonDetailsView extends React.Component<Props, never> {
           return 'genderless'
       }
     }
+
     const rowWrapper = (key: string, value: string | number | JSX.Element) => {
       return (
         <div className='column is-full'> 
@@ -39,7 +42,7 @@ class PersonDetailsView extends React.Component<Props, never> {
 
     return (
       <div className='column is-full'>
-        <div className='columns is-multiline is-variable is-2'>
+        <div className='columns is-multiline is-variable is-2 is-vcentered'>
           <div className='column'>
             <h2>Person details</h2>
           </div>
@@ -55,8 +58,9 @@ class PersonDetailsView extends React.Component<Props, never> {
           </div>
           {rowWrapper('Name', person.name)}
           {rowWrapper('Birth year', person.birth_year)}
-          {rowWrapper('Gender', <i className={`fas fa-${genderIcon()} fa-lg`}></i>)}
-           {person.films.length > 0 
+          {rowWrapper('Gender', <FontAwesomeIcon icon={["fas", genderIcon() ]} size='lg' />)}
+          
+          {person.films.length > 0 
             ? person.films.map((_film: string, index: number) => (
              <div className='column is-narrow' key={index}>
               <Chip label={_film}/>
