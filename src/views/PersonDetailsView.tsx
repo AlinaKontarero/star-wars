@@ -1,45 +1,75 @@
 import * as React from 'react'
+import { Tooltip, IconButton } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-type IPerson = {
-  name: string
-  birthYear: string
-  gender: string
-  films: string[]
-}
+import { Zoom } from '@material-ui/core';
+import { IPerson } from '../stores/person';
+import Loading from '../components/Loading';
 
 interface Props {
   person: IPerson
 }
 
 class PersonDetailsView extends React.Component<Props, never> {
+
+  
   render() {
+    // const films = this.namedFilms()
+
     const { person } = this.props
-    const personGender = ():string => {
+    const genderIcon = ():string => {
       switch(person.gender) {
-        case 'male':
+        case 'MALE':
           return 'mars'
-        case 'female':
+        case 'FEMALE':
           return 'venus'
-        case 'n/a':
+        case 'UNDEFINED':
         default:
           return 'genderless'
       }
     }
-    console.log('gender::: ', personGender())
+    const rowWrapper = (key: string, value: string | number | JSX.Element) => {
+      return (
+        <div className='column is-full'> 
+          <p><b>{key}: </b><span>{value}</span></p>
+        </div>
+      )
+    }
+    const onClose = () => {
+      console.log('close::: ', this.props.person)
+      this.props.person.deselect()
+      console.log('after::: ', this.props.person)
+    }
+
+
     return (
-      <div>
-        <h2>Person details</h2>
-        <i className="fas fa-mars" />
-        <i className="fas fa-camera"></i>
-        <FontAwesomeIcon icon="user-circle" />
-        <p>Name: <span>{person.name}</span></p>
-        <p>Birth year: <span>{person.birthYear}</span></p>
-        <p>Gender: <i className={`fas fa-${personGender()}`}></i></p>
-        {person.films.length > 0 && person.films.map(_film => (
-          <Chip label={_film} key={_film}/>
-        ))}
+      <div className='column is-full'>
+        <div className='columns is-multiline is-variable is-2'>
+          <div className='column'>
+            <h2>Person details</h2>
+          </div>
+          <div className='column is-narrow'>
+          <Tooltip title='Close' TransitionComponent={Zoom} arrow={true} placement={'top'}>
+            <IconButton 
+              onChange={onClose} 
+              color='inherit'
+              >
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+          </div>
+          {rowWrapper('Name', person.name)}
+          {rowWrapper('Birth year', person.birthYear)}
+          {rowWrapper('Gender', <i className={`fas fa-${genderIcon()} fa-lg`}></i>)}
+           {person.films.length > 0 
+            ? person.films.map((_film: string, index: number) => (
+             <div className='column is-narrow' key={index}>
+              <Chip label={_film}/>
+            </div>
+            ))
+            : <Loading />
+          }
+        </div>
       </div>
     )
   }
