@@ -3,11 +3,11 @@ import { Tooltip, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
-import { IPerson } from '../stores/person';
 import Loading from '../components/Loading';
+import { ICharacter } from '../reducers/personReducer';
 
 interface Props {
-  person: IPerson
+  person: ICharacter
 }
 
 class PersonDetailsView extends React.Component<Props, never> {
@@ -19,11 +19,11 @@ class PersonDetailsView extends React.Component<Props, never> {
     const { person } = this.props
     const genderIcon = ():string => {
       switch(person.gender) {
-        case 'MALE':
+        case 'male':
           return 'mars'
-        case 'FEMALE':
+        case 'female':
           return 'venus'
-        case 'UNDEFINED':
+        case 'n/a':
         default:
           return 'genderless'
       }
@@ -36,9 +36,9 @@ class PersonDetailsView extends React.Component<Props, never> {
       )
     }
     const onClose = () => {
-      console.log('close::: ', this.props.person)
-      this.props.person.deselect()
-      console.log('after::: ', this.props.person)
+      // console.log('close::: ', this.props.person)
+      // this.props.person.deselect()
+      // console.log('after::: ', this.props.person)
     }
 
 
@@ -59,7 +59,7 @@ class PersonDetailsView extends React.Component<Props, never> {
           </Tooltip>
           </div>
           {rowWrapper('Name', person.name)}
-          {rowWrapper('Birth year', person.birthYear)}
+          {rowWrapper('Birth year', person.birth_year)}
           {rowWrapper('Gender', <i className={`fas fa-${genderIcon()} fa-lg`}></i>)}
            {person.films.length > 0 
             ? person.films.map((_film: string, index: number) => (

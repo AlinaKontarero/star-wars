@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function EnhancedTable(props: { rows: Data [], getSelectedPerson: (name: string | undefined) => void}) {
+export default function EnhancedTable(props: { rows: Data [], getSelectedPerson?: (name: string | undefined) => void}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
@@ -148,7 +148,7 @@ export default function EnhancedTable(props: { rows: Data [], getSelectedPerson:
   const handleClick = async (event: React.MouseEvent<unknown>, name: string) => {
     event.preventDefault();
     await setSelected(name);
-    props.getSelectedPerson(selected)
+    // props.getSelectedPerson(selected)
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
