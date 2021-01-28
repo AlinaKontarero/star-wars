@@ -9,8 +9,8 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 
 // Import the store function and state
-import configureStore, { IAppState } from './store/Store';
-import { getAllPersons } from './actions/PersonActions';
+import configureStore, { IAppState } from './redux/store/Store';
+import { getAllPersons } from './redux/actions/PersonActions';
 
 import './index.css';
 import App from './App';

@@ -2,8 +2,8 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import Loading from '../components/Loading'
 import Table from '../components/Table'
-import { IAppState } from '../store/Store';
-import { IPerson } from '../reducers/personReducer';
+import { IAppState } from '../redux/store/Store';
+import { IPerson } from '../redux/reducers/personReducer';
 import PersonDetailsView from './PersonDetailsView';
 
 export type IFilm = {
@@ -20,7 +20,7 @@ interface State {
   selected?: IPerson
 }
 
-class AllPersonsView extends React.Component<Props, State>{
+class View extends React.Component<Props, State>{
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -61,8 +61,8 @@ class AllPersonsView extends React.Component<Props, State>{
   return (
     <div className='column is-full'>
       <div className='columns is-multiline'>
-        <div className='column is-full'>
-          <h2>Star Wars people </h2>
+        <div className='column is-full is-heading'>
+          <h1>Star Wars people </h1>
         </div>
           {this.props.persons.length > 0 
           ? <div className='column is-full'>
@@ -92,4 +92,4 @@ const mapStateToProps = (store: IAppState) => {
   };
 };
 
-export default connect(mapStateToProps)(AllPersonsView)
+export default connect(mapStateToProps)(View)

@@ -5,9 +5,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
 import Loading from '../components/Loading';
-import { IPerson } from '../reducers/personReducer';
+import { IPerson } from '../redux/reducers/personReducer';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
-import { IFilm } from './AllPersonsView';
+import { IFilm } from './View';
 
 interface Props {
   person: IPerson
@@ -44,7 +44,6 @@ class PersonDetailsView extends React.Component<Props, never> {
           ))}
           </>
     }
-
 
     const rowWrapper = (key: string, value: string | number | JSX.Element) => {
       return (
