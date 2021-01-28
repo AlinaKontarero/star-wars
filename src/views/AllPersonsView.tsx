@@ -6,13 +6,13 @@ import { IAppState } from '../store/Store';
 import { IPerson } from '../reducers/personReducer';
 import PersonDetailsView from './PersonDetailsView';
 
-type IFilm = {
+export type IFilm = {
   title: string
   url: string
 }
 
 interface Props {
-  allPersons: IPerson[]
+  persons: IPerson[]
 }
 
 interface State {
@@ -42,27 +42,15 @@ class AllPersonsView extends React.Component<Props, State>{
       .catch(err => console.log(err.message));
   }
 
-  private namedFilms = (filmUrls: string[]): string[] => {
-    const filmTitles: string[] = []
-      filmUrls.forEach(_url => {
-      for(let i = 0; i < this.state.films.length; i++) {
-        if(_url === this.state.films[i].url) {
-          filmTitles.push(this.state.films[i].title)
-        }
-      }
-    })
-    return filmTitles
-  } 
-
   render() {
-    const toDisplayPersons = this.props.allPersons.map((_p: any) => ({
+    const toDisplayPersons = this.props.persons.map((_p: any) => ({
       name: _p.name,
       height:_p.height === 'unknown' ? _p.height : parseInt(_p.height),
       mass: _p.mass === 'unknown' ? _p.mass : parseInt(_p.mass),
     }))
 
     const setSelected = (personName: string ) => {
-      const selectedPerson: IPerson | undefined = this.props.allPersons.find(_person => _person.name === personName)
+      const selectedPerson: IPerson | undefined = this.props.persons.find(_person => _person.name === personName)
       this.setState({ selected: selectedPerson })
     }
 
@@ -76,7 +64,7 @@ class AllPersonsView extends React.Component<Props, State>{
         <div className='column is-full'>
           <h2>Star Wars people </h2>
         </div>
-          {this.props.allPersons.length > 0 
+          {this.props.persons.length > 0 
           ? <div className='column is-full'>
               <Table 
                 rows={toDisplayPersons}  
@@ -89,6 +77,7 @@ class AllPersonsView extends React.Component<Props, State>{
           <PersonDetailsView 
             person={this.state.selected} 
             onClose={onClose}
+            films={this.state.films}
           />
          )} 
       </div>
@@ -99,7 +88,7 @@ class AllPersonsView extends React.Component<Props, State>{
 
 const mapStateToProps = (store: IAppState) => {
   return {
-    allPersons: store.PersonState.Persons,
+    persons: store.PersonState.Persons,
   };
 };
 

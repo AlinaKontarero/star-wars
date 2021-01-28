@@ -7,19 +7,17 @@ import { Zoom } from '@material-ui/core';
 import Loading from '../components/Loading';
 import { IPerson } from '../reducers/personReducer';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
+import { IFilm } from './AllPersonsView';
 
 interface Props {
   person: IPerson
   onClose: () => void 
+  films: IFilm[]
 }
 
-class PersonDetailsView extends React.Component<Props, never> {
-
-  
+class PersonDetailsView extends React.Component<Props, never> { 
   render() {
-    // const films = this.namedFilms()
-
-    const { person } = this.props
+    const { person, films, onClose } = this.props
     const genderIcon = (): IconName => {
       switch(person.gender) {
         case 'male':
@@ -31,6 +29,22 @@ class PersonDetailsView extends React.Component<Props, never> {
           return 'genderless'
       }
     }
+
+    const setFilmTitles = (url: string) =>  films.find(film => film.url === url)
+
+    const filmsSection = (): JSX.Element => {
+      const filmsArr: IFilm[] = []
+      const filteredByUrlFilms = person.films.map(_movie => filmsArr.push(setFilmTitles(_movie) || {} as IFilm))
+      return filmsArr.length === 0 
+        ? <Loading />
+        : <> {filmsArr.map((_film: IFilm, index: number) => (
+           <div className='column is-narrow' key={index}>
+            <Chip label={_film.title}/>
+          </div>
+          ))}
+          </>
+    }
+
 
     const rowWrapper = (key: string, value: string | number | JSX.Element) => {
       return (
@@ -49,7 +63,7 @@ class PersonDetailsView extends React.Component<Props, never> {
           <div className='column is-narrow'>
           <Tooltip title='Close' TransitionComponent={Zoom} arrow={true} placement={'top'}>
             <IconButton 
-              onClick={this.props.onClose} 
+              onClick={onClose} 
               color='inherit'
               >
               <CloseIcon />
@@ -59,15 +73,7 @@ class PersonDetailsView extends React.Component<Props, never> {
           {rowWrapper('Name', person.name)}
           {rowWrapper('Birth year', person.birth_year)}
           {rowWrapper('Gender', <FontAwesomeIcon icon={["fas", genderIcon() ]} size='lg' />)}
-          
-          {person.films.length > 0 
-            ? person.films.map((_film: string, index: number) => (
-             <div className='column is-narrow' key={index}>
-              <Chip label={_film}/>
-            </div>
-            ))
-            : <Loading />
-          }
+          {filmsSection()}
         </div>
       </div>
     )
