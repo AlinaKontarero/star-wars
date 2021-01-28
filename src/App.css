@@ -22,6 +22,7 @@
 .is-footer {
   margin-top: auto;
   bottom: 0;
+  background-color: inherit;
 }
 
 a {
