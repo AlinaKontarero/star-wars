@@ -6,20 +6,24 @@
   --grey: #efefef;
   --pink:  #f93d66;
   --violet: #6d47d9
+
 }
 
-html {
-  font-family: 'Montserrat', sans-serif;
-}
 
 .App {
   background:linear-gradient(110deg, var(--pink), var(--violet));
   color: var(--white);
+  height: 100%;
+  min-height: 100vh;
+  padding: 0 auto;
+  margin: 0 auto;
 }
 
 .is-footer {
-  font-size: 10;
+  margin-top: auto;
+  bottom: 0;
 }
+
 a {
   color: var(--white);
 }
