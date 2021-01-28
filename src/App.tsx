@@ -1,7 +1,6 @@
 import * as React from 'react';
-import './App.css';
-import Footer from './components/Footer';
 import View from './views/View';
+import './App.css';
 
 const App = () => {
   return (
@@ -9,7 +8,6 @@ const App = () => {
       <div className='column is-10'>
         <div className='columns is-multiline is-variable is-2 '>
           <View />
-          <Footer />
         </div>
       </div>
     </div>
