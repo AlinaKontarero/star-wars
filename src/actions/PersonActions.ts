@@ -1,38 +1,43 @@
-// Import redux types
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from 'axios';
 
-// Import Character Typing
 import { ICharacter, IPersonstate } from '../reducers/personReducer';
 
-// Create Action Constants
 export enum CharacterActionTypes {
   GET_ALL = 'GET_ALL',
 }
-
-// Interface for Get All Action Type
 export interface ICharacterGetAllAction {
   type: CharacterActionTypes.GET_ALL;
   Persons: ICharacter[];
 }
 
-/* 
-Combine the action types with a union (we assume there are more)
-example: export type CharacterActions = IGetAllAction | IGetOneAction ... 
-*/
 export type CharacterActions = ICharacterGetAllAction;
 
-/* Get All Action
-<Promise<Return Type>, State Interface, Type of Param, Type of Action> */
 export const getAllPersons: ActionCreator<
   ThunkAction<Promise<any>, IPersonstate, null, ICharacterGetAllAction>
 > = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await axios.get('https://swapi.dev/api/people');
+      const reqLinks = [];
+      const testCall = await axios.get('https://swapi.dev/api/people')
+      const pagesNumber: number = Math.ceil(testCall.data.count / testCall.data.results.length)
+      // Start from second page as we already have the data from 1st page:
+      for (let i = 2; i <= pagesNumber; i++) {
+        reqLinks.push('https://swapi.dev/api/people/?page=' + i)
+      }
+
+      const responses = await Promise.all(
+        reqLinks.map(link => 
+          axios(link).then(({data: responses}) => responses)
+        ))
+      
+      const result = [...responses, testCall.data]
+        .map(_res => _res.results) 
+        .flat(1)
+
       dispatch({
-        Persons: response.data.results,
+        Persons: result,
         type: CharacterActionTypes.GET_ALL,
       });
     } catch (err) {

@@ -57,8 +57,8 @@ class AllPersonsView extends React.Component<Props, State>{
   render() {
     const toDisplayPersons = this.props.allPersons.map((_p: any) => ({
       name: _p.name,
-      height: _p.height,
-      mass: _p.mass,
+      height:_p.height === 'unknown' ? _p.height : parseInt(_p.height),
+      mass: _p.mass === 'unknown' ? _p.mass : parseInt(_p.mass),
     }))
 
     const setSelected = (personName: string ) => {
@@ -104,60 +104,3 @@ const mapStateToProps = (store: IAppState) => {
 };
 
 export default connect(mapStateToProps)(AllPersonsView)
-
-// public componentDidMount() {
-//   // Get all films: 
-//   fetch('https://swapi.dev/api/films/')
-//     .then(res => res.json())
-//     .then(data => {
-//       const filteredFilms = data.results.map((_film: any) => ({
-//         title: _film.title,
-//         url: _film.url
-//       }))
-//       this.setState({ filmsArray: filteredFilms });
-//     })
-//     .catch(err => console.log(err.message));
-
-
-//   // Get all persons
-//   const requests = [];
-
-//   for (let i = 1; i <= 9; i++) {
-//     requests.push(fetch('https://swapi.dev/api/people/?page=' + i));
-//   }
-
-//   Promise.all(requests)
-//     .then(res => Promise.all(res.map(r => r.json())))
-//     .then(data => {
-//       const people: any[] = [];
-
-//       data.forEach(d => {people.push(...d.results)});
-
-//       const filteredPeople: any[] = people.map((_hero: any) => ({
-//         name: _hero.name,
-//         height: _hero.height,
-//         mass: _hero.mass,
-//         birthYear: _hero.birth_year,
-//         gender: _hero.gender,
-//         films: this.namedFilms(_hero.films),
-//         isSelected: false
-//       } ))
-
-//       this.setState({ peopleArray: filteredPeople });
-//       console.log('people:::: ', this.state.peopleArray)
-//     })
-//     .catch(err => console.log(err.message));
-// }
-
-// private namedFilms = (filmUrls: string[]): string[] => {
-//   const filmTitles: string[] = []
-//     filmUrls.forEach(_url => {
-//     for(let i = 0; i < this.state.filmsArray.length; i++) {
-//       if(_url === this.state.filmsArray[i].url) {
-//         filmTitles.push(this.state.filmsArray[i].title)
-//       }
-//     }
-//   })
-//   console.log('titles::: ', filmTitles)
-//   return filmTitles
-// } 

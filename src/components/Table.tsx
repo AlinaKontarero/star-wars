@@ -12,8 +12,8 @@ import Paper from '@material-ui/core/Paper';
 
 export type Data =  {
   name: string;
-  height: string;
-  mass: string;
+  height: number | string;
+  mass: number | string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -55,9 +55,9 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'height', numeric: true, disablePadding: false, label: 'Height' },
-  { id: 'mass', numeric: true, disablePadding: false, label: 'Mass' }
+  { id: 'name', numeric: false, disablePadding: false, label: 'Name' },
+  { id: 'height', numeric: false, disablePadding: false, label: 'Height' },
+  { id: 'mass', numeric: false, disablePadding: false, label: 'Mass' }
 ];
 
 interface EnhancedTableProps {
