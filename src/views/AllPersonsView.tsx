@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Loading from '../components/Loading'
 import Table from '../components/Table'
 import { IAppState } from '../store/Store';
-import { ICharacter } from '../reducers/personReducer';
+import { IPerson } from '../reducers/personReducer';
 import PersonDetailsView from './PersonDetailsView';
 
 type IFilm = {
@@ -12,12 +12,12 @@ type IFilm = {
 }
 
 interface Props {
-  allPersons: ICharacter[]
+  allPersons: IPerson[]
 }
 
 interface State {
   films: IFilm[]
-  selected?: ICharacter
+  selected?: IPerson
 }
 
 class AllPersonsView extends React.Component<Props, State>{
@@ -62,7 +62,7 @@ class AllPersonsView extends React.Component<Props, State>{
     }))
 
     const setSelected = (personName: string ) => {
-      const selectedPerson: ICharacter | undefined = this.props.allPersons.find(_person => _person.name === personName)
+      const selectedPerson: IPerson | undefined = this.props.allPersons.find(_person => _person.name === personName)
       this.setState({ selected: selectedPerson })
     }
 
@@ -99,7 +99,7 @@ class AllPersonsView extends React.Component<Props, State>{
 
 const mapStateToProps = (store: IAppState) => {
   return {
-    allPersons: store.Personstate.Persons,
+    allPersons: store.PersonState.Persons,
   };
 };
 

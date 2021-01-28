@@ -2,14 +2,14 @@ import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from 'axios';
 
-import { ICharacter, IPersonstate } from '../reducers/personReducer';
+import { IPerson, IPersonstate } from '../reducers/personReducer';
 
 export enum CharacterActionTypes {
   GET_ALL = 'GET_ALL',
 }
 export interface ICharacterGetAllAction {
   type: CharacterActionTypes.GET_ALL;
-  Persons: ICharacter[];
+  Persons: IPerson[];
 }
 
 export type CharacterActions = ICharacterGetAllAction;

@@ -5,11 +5,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
 import Loading from '../components/Loading';
-import { ICharacter } from '../reducers/personReducer';
+import { IPerson } from '../reducers/personReducer';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-  person: ICharacter
+  person: IPerson
   onClose: () => void 
 }
 

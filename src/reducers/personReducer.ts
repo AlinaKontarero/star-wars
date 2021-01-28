@@ -6,7 +6,7 @@ import {
 } from '../actions/PersonActions';
 
 // Define the Character type
-export interface ICharacter {
+export interface IPerson {
   name: string;
   height: string;
   mass: string;
@@ -27,7 +27,7 @@ export interface ICharacter {
 
 // Define the Character State
 export interface IPersonstate {
-  readonly Persons: ICharacter[];
+  readonly Persons: IPerson[];
 }
 
 // Define the initial state
@@ -35,7 +35,7 @@ const initialPersonstate: IPersonstate = {
   Persons: [],
 };
 
-export const characterReducer: Reducer<IPersonstate, CharacterActions> = (
+export const personReducer: Reducer<IPersonstate, CharacterActions> = (
   state = initialPersonstate,
   action
 ) => {
