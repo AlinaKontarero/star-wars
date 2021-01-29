@@ -8,26 +8,33 @@
   --violet: #6d47d9
 }
 
-html {
-  font-family: 'Montserrat', sans-serif;
-}
-
 .App {
   background:linear-gradient(110deg, var(--pink), var(--violet));
   color: var(--white);
+  height: 100%;
+  min-height: 100vh;
+  padding: 0 auto;
+  margin: 0 auto;
 }
 
-.is-footer {
-  font-size: 10;
-}
-a {
-  color: var(--white);
+.person-details-section {
+  margin-bottom: 50px
 }
 
+h1, h2 {
+  font-family: 'Press Start 2P';
+}
+h1 {
+  font-size: 2rem;
+  padding-bottom: 30px;
+}
 
 h2 {
   font-size: 1.5rem;
-  font-family: 'Press Start 2P';
+}
+
+.is-heading {
+  margin-top: 100px;
 }
 
 .center {

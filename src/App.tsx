@@ -1,38 +1,17 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import * as React from 'react';
 import View from './views/View';
-
+import './App.css';
 
 const App = () => {
-  const [person, setPerson] = React.useState([]);
-  const [films, setFilms] = React.useState([]);
-  // const fetchData = async (attr: string) => {
-  //     const response = await fetch(`https://swapi.dev/api/${attr}`);
-  //     return response.json();
-  // };
-
-  // useEffect(() =>{
-  //   fetchData('people')
-  //   .then(res => {
-  //     fetchData(res.people).then(people => setPerson(people.results));
-
-
-  //   // fetchData('https://swapi.dev/api/people/')
-  //   //   .then(res => {
-  //   //     fetchData(res.people).then(people => setPerson(people.results));
-  //   //     fetchData(res.films).then(films => setFilms(films.results));
-  //   //   });
-  // }, [])
-
-
-  
-
-  console.log(films)
   return (
-    <div className="App">
-      <View />
+    <div className='columns is-centered App'>
+      <div className='column is-10'>
+        <div className='columns is-multiline is-variable is-2 '>
+          <View />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -9,11 +9,12 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import { makeid } from '../utils/makeid';
 
 export type Data =  {
   name: string;
-  height: string;
-  mass: string;
+  height: number | string;
+  mass: number | string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -48,16 +49,15 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 }
 
 interface HeadCell {
-  disablePadding: boolean;
   id: keyof Data;
   label: string;
-  numeric: boolean;
+  sortable: boolean
 }
 
 const headCells: HeadCell[] = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'height', numeric: true, disablePadding: false, label: 'Height' },
-  { id: 'mass', numeric: true, disablePadding: false, label: 'Mass' }
+  { id: 'name', label: 'Name', sortable: true },
+  { id: 'height', label: 'Height', sortable: false },
+  { id: 'mass', label: 'Mass', sortable: false }
 ];
 
 interface EnhancedTableProps {
@@ -78,25 +78,31 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
+          headCell.sortable 
+          ? (<TableCell
+              className={classes.headTableCell}
+              key={makeid()}
+              align={'center'}
+              sortDirection={orderBy === headCell.id ? order : false}
             >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : 'asc'}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            </TableCell>)
+          : <TableCell
+              key={makeid()}
+              align={'center'}
+              className={classes.headTableCell}
+            > {headCell.label} </TableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -108,6 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      overflowX: 'hidden',
     },
     paper: {
       width: '100%',
@@ -115,6 +122,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     table: {
       minWidth: 750,
+      overflowX: 'hidden',
+      tableLayout: 'fixed'
     },
     visuallyHidden: {
       border: 0,
@@ -127,10 +136,14 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 20,
       width: 1,
     },
+    headTableCell: {
+      minWidth: 528,
+      fontWeight: 'bold'
+    }
   }),
 );
 
-export default function EnhancedTable(props: { rows: Data [], getSelectedPerson: (name: string | undefined) => void}) {
+export default function EnhancedTable(props: { rows: Data [], setSelectedPerson: (name: string) => void}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
@@ -148,7 +161,7 @@ export default function EnhancedTable(props: { rows: Data [], getSelectedPerson:
   const handleClick = async (event: React.MouseEvent<unknown>, name: string) => {
     event.preventDefault();
     await setSelected(name);
-    props.getSelectedPerson(selected)
+    props.setSelectedPerson(name)
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -186,14 +199,12 @@ export default function EnhancedTable(props: { rows: Data [], getSelectedPerson:
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
-                      key={row.name}
+                      key={makeid()}
                       selected={selected === row.name}
                     >
-                      <TableCell component="th" scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
-                       <TableCell align="center">{row.height}</TableCell>
-                      <TableCell align="center">{row.mass}</TableCell>
+                      <TableCell key={makeid()}> {row.name} </TableCell>
+                      <TableCell align="center" key={makeid()}>{row.height}</TableCell>
+                      <TableCell align="center" key={makeid()}>{row.mass}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -201,8 +212,8 @@ export default function EnhancedTable(props: { rows: Data [], getSelectedPerson:
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
+          rowsPerPageOptions={[5, 10]}
+          component="div" 
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
