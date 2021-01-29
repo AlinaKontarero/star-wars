@@ -54,7 +54,7 @@ class PersonDetailsView extends React.Component<Props, never> {
     }
 
     return (
-      <div className='column is-full'>
+      <div className='column is-full person-details-section'>
         <div className='columns is-multiline is-variable is-2 is-vcentered'>
           <div className='column'>
             <h2>Person details</h2>

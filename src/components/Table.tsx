@@ -9,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import { makeid } from '../utils/makeid';
 
 export type Data =  {
   name: string;
@@ -77,32 +78,31 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <>{headCell.sortable 
+          headCell.sortable 
           ? (<TableCell
-            key={headCell.id}
-            align={'center'}
-            padding={'default'}
-            sortDirection={orderBy === (headCell.sortable ? headCell.id : false) ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
+              className={classes.headTableCell}
+              key={makeid()}
+              align={'center'}
+              sortDirection={orderBy === headCell.id ? order : false}
             >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>)
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : 'asc'}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            </TableCell>)
           : <TableCell
-          key={headCell.id}
-          align={'center'}
-          padding={'default'}
-        > {headCell.label} </TableCell>}
-        </>
+              key={makeid()}
+              align={'center'}
+              className={classes.headTableCell}
+            > {headCell.label} </TableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -114,6 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      overflowX: 'hidden',
     },
     paper: {
       width: '100%',
@@ -121,6 +122,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     table: {
       minWidth: 750,
+      overflowX: 'hidden',
+      tableLayout: 'fixed'
     },
     visuallyHidden: {
       border: 0,
@@ -133,6 +136,10 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 20,
       width: 1,
     },
+    headTableCell: {
+      minWidth: 528,
+      fontWeight: 'bold'
+    }
   }),
 );
 
@@ -192,14 +199,12 @@ export default function EnhancedTable(props: { rows: Data [], setSelectedPerson:
                       hover
                       onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
-                      key={row.name}
+                      key={makeid()}
                       selected={selected === row.name}
                     >
-                      <TableCell component="th" scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
-                       <TableCell align="center">{row.height}</TableCell>
-                      <TableCell align="center">{row.mass}</TableCell>
+                      <TableCell key={makeid()}> {row.name} </TableCell>
+                      <TableCell align="center" key={makeid()}>{row.height}</TableCell>
+                      <TableCell align="center" key={makeid()}>{row.mass}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -207,8 +212,8 @@ export default function EnhancedTable(props: { rows: Data [], setSelectedPerson:
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 20]}
-          component="div"
+          rowsPerPageOptions={[5, 10]}
+          component="div" 
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
