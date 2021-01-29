@@ -48,16 +48,15 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 }
 
 interface HeadCell {
-  disablePadding: boolean;
   id: keyof Data;
   label: string;
-  numeric: boolean;
+  sortable: boolean
 }
 
 const headCells: HeadCell[] = [
-  { id: 'name', numeric: false, disablePadding: false, label: 'Name' },
-  { id: 'height', numeric: false, disablePadding: false, label: 'Height' },
-  { id: 'mass', numeric: false, disablePadding: false, label: 'Mass' }
+  { id: 'name', label: 'Name', sortable: true },
+  { id: 'height', label: 'Height', sortable: false },
+  { id: 'mass', label: 'Mass', sortable: false }
 ];
 
 interface EnhancedTableProps {
@@ -78,11 +77,12 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
+          <>{headCell.sortable 
+          ? (<TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            align={'center'}
+            padding={'default'}
+            sortDirection={orderBy === (headCell.sortable ? headCell.id : false) ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -96,7 +96,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                 </span>
               ) : null}
             </TableSortLabel>
-          </TableCell>
+          </TableCell>)
+          : <TableCell
+          key={headCell.id}
+          align={'center'}
+          padding={'default'}
+        > {headCell.label} </TableCell>}
+        </>
         ))}
       </TableRow>
     </TableHead>
