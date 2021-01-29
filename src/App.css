@@ -6,7 +6,6 @@
   --grey: #efefef;
   --pink:  #f93d66;
   --violet: #6d47d9
-
 }
 
 .App {
@@ -19,10 +18,6 @@
 }
 .column:last-child {
   padding-bottom: 50px;
-}
-
-a {
-  color: var(--white);
 }
 
 h1, h2 {
