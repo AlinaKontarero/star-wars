@@ -1,32 +1,23 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import View from './views/View';
-import { shallow } from 'enzyme';
-import App from './App';
-import { Store } from '@material-ui/icons';
-import { Provider } from 'react-redux';
+import React from "react";
+import { configure, shallow } from "enzyme";
+import { Provider } from "react-redux";
+import configureMockStore from "redux-mock-store";
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import App from "./App";
 
-// xtest('display heading', () => {
-//   render(<View />);
-//   const headingElement = screen.getByText(/star wars people/i);
-//   expect(headingElement).toBeInTheDocument();
-// });
+configure({adapter: new Adapter()});
 
-it("renders without crashing", () => {
-  shallow(<App />);
+const mockStore = configureMockStore();
+const store = mockStore({});
+
+describe("App Component", () => {
+    it("should render without throwing an error", () => {
+        expect(
+            shallow(
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            ).exists()
+        ).toBe(true);
+    });
 });
-
-// it("renders Account header", () => {
-//   const TestComponent = <Provider store={Store}><View /></Provider>
-//   const welcome = <h1>Star Wars people </h1>;
-//   expect(wrapper.contains(welcome)).toEqual(true);
-// });
-
-// import { render, fireEvent, screen } from '../../test-utils'
-// import App from '../../containers/App'
-
-// it('Renders the connected app with initialState', () => {
-//   render(<App />, { initialState: { user: 'Redux User' } })
-
-//   expect(screen.getByText(/redux user/i)).toBeInTheDocument()
-// })
