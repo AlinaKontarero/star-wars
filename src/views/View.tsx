@@ -20,7 +20,7 @@ interface State {
   selected?: IPerson
 }
 
-class View extends React.Component<Props, State>{
+export class View extends React.Component<Props, State>{
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -62,7 +62,7 @@ class View extends React.Component<Props, State>{
     <div className='column is-full'>
       <div className='columns is-multiline'>
         <div className='column is-full is-heading'>
-          <h1>Star Wars people </h1>
+          <h1>Star Wars people</h1>
         </div>
           {this.props.persons.length > 0 
           ? <div className='column is-full'>

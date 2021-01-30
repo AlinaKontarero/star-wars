@@ -1,4 +1,4 @@
-import { makeid } from './makeid';
+import { makeid } from '../utils/makeid';
 
 describe('makeid ', () => {
   const instance1 = {
