@@ -212,7 +212,7 @@ export default function EnhancedTable(props: { rows: Data [], setSelectedPerson:
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10]}
+          rowsPerPageOptions={[rowsPerPage]}
           component="div" 
           count={rows.length}
           rowsPerPage={rowsPerPage}
