@@ -11,7 +11,7 @@ const getPersons = (persons: IPerson[]) => ({
 const mockStore = configureMockStore()
 const store = mockStore({})
 describe('action GET_ALL', () => {
-  it('creates Persons array', () => {
+it('creates Persons array', () => {
     store.dispatch(getPersons(mockPersons));
     expect(store.getActions()).toMatchSnapshot();
   });
