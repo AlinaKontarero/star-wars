@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonDetailsView Component should render with given state from Redux store 1`] = `
+<div
+  className="column is-full person-details-section"
+>
+  <div
+    className="columns is-multiline is-variable is-2 is-vcentered"
+  >
+    <div
+      className="column"
+    >
+      <h2>
+        Person details
+      </h2>
+    </div>
+    <div
+      className="column is-narrow"
+    >
+      <button
+        aria-describedby={null}
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        title="Close"
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      className="column is-full"
+    >
+      <p>
+        <b>
+          Name
+          : 
+        </b>
+        <span>
+          Luke Skywalker
+        </span>
+      </p>
+    </div>
+    <div
+      className="column is-full"
+    >
+      <p>
+        <b>
+          Birth year
+          : 
+        </b>
+        <span>
+          19BBY
+        </span>
+      </p>
+    </div>
+    <div
+      className="column is-full"
+    >
+      <p>
+        <b>
+          Gender
+          : 
+        </b>
+        <span />
+      </p>
+    </div>
+     
+    <div
+      className="column is-narrow"
+    >
+      <div
+        className="MuiChip-root makeStyles-root-1 MuiChip-outlined"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <i
+          className="MuiChip-icon makeStyles-icon-2 fas fa-film fa-lg"
+        />
+        <span
+          className="MuiChip-label"
+        >
+          A New Hope
+        </span>
+      </div>
+    </div>
+    <div
+      className="column is-narrow"
+    >
+      <div
+        className="MuiChip-root makeStyles-root-1 MuiChip-outlined"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <i
+          className="MuiChip-icon makeStyles-icon-2 fas fa-film fa-lg"
+        />
+        <span
+          className="MuiChip-label"
+        >
+          The Empire Strikes Back
+        </span>
+      </div>
+    </div>
+    <div
+      className="column is-narrow"
+    >
+      <div
+        className="MuiChip-root makeStyles-root-1 MuiChip-outlined"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <i
+          className="MuiChip-icon makeStyles-icon-2 fas fa-film fa-lg"
+        />
+        <span
+          className="MuiChip-label"
+        />
+      </div>
+    </div>
+    <div
+      className="column is-narrow"
+    >
+      <div
+        className="MuiChip-root makeStyles-root-1 MuiChip-outlined"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+      >
+        <i
+          className="MuiChip-icon makeStyles-icon-2 fas fa-film fa-lg"
+        />
+        <span
+          className="MuiChip-label"
+        >
+          Revenge of the Sith
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
