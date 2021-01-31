@@ -1,10 +1,10 @@
 import configureMockStore from 'redux-mock-store'
-import { CharacterActionTypes } from '../redux/actions/PersonActions';
+import { PersonActionTypes } from '../redux/actions/PersonActions';
 import { IPerson } from '../redux/reducers/personReducer';
 import { mockPersons } from './mockups/mockPersons';
 
 const getPersons = (persons: IPerson[]) => ({
-  type: CharacterActionTypes.GET_ALL,
+  type: PersonActionTypes.GET_ALL,
   Persons: persons
 });
 

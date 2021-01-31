@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import {
   CharacterActions,
-  CharacterActionTypes,
+  PersonActionTypes,
 } from '../actions/PersonActions';
 
 export interface IPerson {
@@ -35,7 +35,7 @@ export const personReducer: Reducer<IPersonstate, CharacterActions> = (
   action
 ) => {
   switch (action.type) {
-    case CharacterActionTypes.GET_ALL: {
+    case PersonActionTypes.GET_ALL: {
       return {
         ...state,
         Persons: action.Persons,
