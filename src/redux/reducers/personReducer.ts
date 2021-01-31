@@ -1,11 +1,9 @@
-// Import Reducer type
 import { Reducer } from 'redux';
 import {
   CharacterActions,
   CharacterActionTypes,
 } from '../actions/PersonActions';
 
-// Define the Character type
 export interface IPerson {
   name: string;
   height: string;
@@ -24,13 +22,10 @@ export interface IPerson {
   edited: string;
   url: string;
 }
-
-// Define the Character State
 export interface IPersonstate {
   readonly Persons: IPerson[];
 }
 
-// Define the initial state
 export const initialPersonstate: IPersonstate = {
   Persons: [],
 };
