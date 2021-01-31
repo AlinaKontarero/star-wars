@@ -5,14 +5,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import Chip from '../components/Chip'
 import { Zoom } from '@material-ui/core';
 import Loading from '../components/Loading';
-import { IPerson } from '../redux/reducers/personReducer';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
-import { IFilm } from './View';
+import { IPerson, IFilm } from '../redux/types';
 
 interface Props {
   person: IPerson
-  onClose: () => void 
   films: IFilm[]
+  onClose: () => void 
 }
 
 class PersonDetailsView extends React.Component<Props, never> { 
@@ -34,7 +33,7 @@ class PersonDetailsView extends React.Component<Props, never> {
 
     const filmsSection = (): JSX.Element => {
       const filmsArr: IFilm[] = []
-      const filteredByUrlFilms = person.films.map(_movie => filmsArr.push(setFilmTitles(_movie) || {} as IFilm))
+      person.films.map(_movie => filmsArr.push(setFilmTitles(_movie) || {} as IFilm))
       return filmsArr.length === 0 
         ? <Loading />
         : <> {filmsArr.map((_film: IFilm, index: number) => (

@@ -1,8 +1,6 @@
-import { PersonActionTypes } from "../redux/actions/PersonActions"
-import { initialPersonstate, personReducer } from "../redux/reducers/personReducer"
+import { PersonActionTypes } from "../redux/actions"
+import { initialPersonstate, personReducer } from "../redux/reducer"
 import { mockPersons } from "./mockups/mockPersons"
-
-
 
 describe('personReducer', () => {
   it('should return the initial state', () => {

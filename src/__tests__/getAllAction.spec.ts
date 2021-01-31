@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'
-import { PersonActionTypes } from '../redux/actions/PersonActions';
-import { IPerson } from '../redux/reducers/personReducer';
+import { PersonActionTypes } from '../redux/actions';
+import { IPerson } from '../redux/types';
 import { mockPersons } from './mockups/mockPersons';
 
 const getPersons = (persons: IPerson[]) => ({

@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import configureStore, { IAppState } from './redux/store/Store';
-import { getAllPersons } from './redux/actions/PersonActions';
+import configureStore, { IAppState } from './redux/store';
+import { getAllPersons } from './redux/actions';
 import App from './App';
 import './index.css';
 

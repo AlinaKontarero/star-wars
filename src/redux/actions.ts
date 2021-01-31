@@ -1,8 +1,8 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from 'axios';
-
-import { IPerson, IPersonstate } from '../reducers/personReducer';
+import { IPersonstate } from './reducer';
+import { IPerson } from './types';
 
 export enum PersonActionTypes {
   GET_ALL = 'GET_ALL',
