@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import configureStore, { IAppState } from './redux/store';
 import { getAllPersons } from './redux/actions';
-import App from './App';
-import './index.css';
+import App from './views/App';
+import './styles/index.css';
 
 interface IProps {
   store: Store<IAppState>;

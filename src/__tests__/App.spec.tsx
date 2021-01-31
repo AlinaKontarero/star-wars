@@ -3,7 +3,7 @@ import { configure, shallow } from "enzyme";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import App from "../App";
+import App from "../views/App";
 
 configure({adapter: new Adapter()});
 
