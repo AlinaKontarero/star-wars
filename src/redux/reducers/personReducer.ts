@@ -31,7 +31,7 @@ export interface IPersonstate {
 }
 
 // Define the initial state
-const initialPersonstate: IPersonstate = {
+export const initialPersonstate: IPersonstate = {
   Persons: [],
 };
 
