@@ -10,8 +10,8 @@ const getPersons = (persons: IPerson[]) => ({
 
 const mockStore = configureMockStore()
 const store = mockStore({})
-describe('action creators', () => {
-  it('creates CREATE_SUCCESS when creating a to-do was successful', () => {
+describe('action GET_ALL', () => {
+  it('creates Persons array', () => {
     store.dispatch(getPersons(mockPersons));
     expect(store.getActions()).toMatchSnapshot();
   });

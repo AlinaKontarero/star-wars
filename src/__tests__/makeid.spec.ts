@@ -1,6 +1,6 @@
 import { makeid } from '../utils/makeid';
 
-describe('makeid ', () => {
+describe('makeid', () => {
   const instance1 = {
     key: makeid(),
   };

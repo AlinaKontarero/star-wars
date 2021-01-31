@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`action creators creates CREATE_SUCCESS when creating a to-do was successful 1`] = `
+exports[`action GET_ALL creates Persons array 1`] = `
 Array [
   Object {
     "Persons": Array [
