@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {
   personReducer,
   IPersonstate,
-} from '../reducers/personReducer';
+} from './reducer';
 export interface IAppState {
   PersonState: IPersonstate;
 }

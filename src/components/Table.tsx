@@ -149,7 +149,7 @@ export default function EnhancedTable(props: { rows: Data [], setSelectedPerson:
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
   const [selected, setSelected] = React.useState<string>();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const rows = props.rows;
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
@@ -212,7 +212,7 @@ export default function EnhancedTable(props: { rows: Data [], setSelectedPerson:
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10]}
+          rowsPerPageOptions={[rowsPerPage]}
           component="div" 
           count={rows.length}
           rowsPerPage={rowsPerPage}

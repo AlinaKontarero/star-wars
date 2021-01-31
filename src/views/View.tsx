@@ -2,14 +2,9 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import Loading from '../components/Loading'
 import Table from '../components/Table'
-import { IAppState } from '../redux/store/Store';
-import { IPerson } from '../redux/reducers/personReducer';
+import { IAppState } from '../redux/store';
 import PersonDetailsView from './PersonDetailsView';
-
-export type IFilm = {
-  title: string
-  url: string
-}
+import { IFilm, IPerson } from '../redux/types';
 
 interface Props {
   persons: IPerson[]

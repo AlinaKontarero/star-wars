@@ -1,4 +1,5 @@
-import { IPerson } from "../../redux/reducers/personReducer";
+import { IPerson } from "../../redux/types";
+
 
 export const mockPersons: IPerson[] = [
   {

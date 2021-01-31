@@ -1,9 +1,5 @@
 :root {
-  --red: #FF4949;
-  --black: #2E2E2E;
-  --yellow: #ffc600;
   --white: #fff;
-  --grey: #efefef;
   --pink:  #f93d66;
   --violet: #6d47d9
 }
@@ -15,10 +11,6 @@
   min-height: 100vh;
   padding: 0 auto;
   margin: 0 auto;
-}
-
-.person-details-section {
-  margin-bottom: 50px
 }
 
 h1, h2 {
@@ -34,7 +26,11 @@ h2 {
 }
 
 .is-heading {
-  margin-top: 100px;
+  margin-top: 60px;
+}
+
+.person-details-section {
+  margin-bottom: 50px
 }
 
 .center {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import View from './views/View';
-import './App.css';
+import View from './View';
+import '../styles/App.css';
 
 const App = () => {
   return (

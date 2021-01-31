@@ -1,4 +1,5 @@
-import { IFilm } from '../../views/View';
+import { IFilm } from "../../redux/types";
+
 
 export const mockFilms: IFilm[] = [
   {

@@ -1,21 +1,21 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios from 'axios';
+import { IPersonstate } from './reducer';
+import { IPerson } from './types';
 
-import { IPerson, IPersonstate } from '../reducers/personReducer';
-
-export enum CharacterActionTypes {
+export enum PersonActionTypes {
   GET_ALL = 'GET_ALL',
 }
-export interface ICharacterGetAllAction {
-  type: CharacterActionTypes.GET_ALL;
+export interface IPersonGetAllAction {
+  type: PersonActionTypes.GET_ALL;
   Persons: IPerson[];
 }
 
-export type CharacterActions = ICharacterGetAllAction;
+export type CharacterActions = IPersonGetAllAction;
 
 export const getAllPersons: ActionCreator<
-  ThunkAction<Promise<any>, IPersonstate, null, ICharacterGetAllAction>
+  ThunkAction<Promise<any>, IPersonstate, null, IPersonGetAllAction>
 > = () => {
   return async (dispatch: Dispatch) => {
     try {
@@ -38,7 +38,7 @@ export const getAllPersons: ActionCreator<
 
       dispatch({
         Persons: result,
-        type: CharacterActionTypes.GET_ALL,
+        type: PersonActionTypes.GET_ALL,
       });
     } catch (err) {
       console.error(err);
